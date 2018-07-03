@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package>
+	<metadata>
+		<id>Spark.SAML2.Core</id>
+		<version>$version$</version>
+		<authors>Lexicon Developers</authors>
+		<iconUrl>https://demo.incidentiq.com/media/img/iiq-docs-logo-blue.png</iconUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>A SAML2 library forked from https://github.com/elerch/SAML2</description>
+		<releaseNotes>SAML2 Library</releaseNotes>
+		<copyright>Copyright 2018</copyright>
+		<tags>iiQ IncidentIQ SAML2 Library</tags>
+
+		<frameworkAssemblies>
+		</frameworkAssemblies>
+
+		<dependencies>
+
+		</dependencies>
+
+	</metadata>
+	<files></files>
+
+
+</package>

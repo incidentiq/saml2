@@ -68,7 +68,14 @@ namespace SAML2.Config
             }
         }
 
-        public void AddByMetadataDirectory(string path)
+		public void AddByMetadataString(string metaData)
+		{
+			var encodings = GetEncodings();
+			var metadataDoc = new Saml20MetadataDocument(new MemoryStream(encodings.First().GetBytes(metaData)), encodings);
+			AdjustIdpListWithNewMetadata(metadataDoc);			
+		}
+
+		public void AddByMetadataDirectory(string path)
         {
             AddByMetadata(Directory.GetFiles(path));
         }

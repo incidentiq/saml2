@@ -749,8 +749,8 @@ namespace SAML2
                             BindingType binding;
                             switch (endpoint.Binding)
                             {
-                                case Saml20Constants.ProtocolBindings.HttpPost:
-                                    binding = BindingType.Post;
+                                case Saml20Constants.ProtocolBindings.HttpPost:								
+									binding = BindingType.Post;
                                     break;
                                 case Saml20Constants.ProtocolBindings.HttpRedirect:
                                     binding = BindingType.Redirect;
@@ -764,7 +764,11 @@ namespace SAML2
                                 case "urn:mace:shibboleth:1.0:profiles:AuthnRequest":
                                     // This is a SAML 1.1 binding, it is silly, we shall ignore it
                                     continue;
-                                default:
+
+								case Saml20Constants.ProtocolBindings.HttpPostSimpleSign:
+									//Not currently implemented. See spec: https://www.oasis-open.org/committees/download.php/25607/sstc-saml-binding-simplesign-cd-02.pdf
+									continue;
+								default:
                                     throw new InvalidOperationException("Binding not supported: " + endpoint.Binding);
                             }
 
