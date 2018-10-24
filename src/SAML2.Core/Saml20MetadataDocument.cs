@@ -206,7 +206,20 @@ namespace SAML2
             try {
                 // First attempt a standard load, where the XML document is expected to declare its encoding by itself.
                 docLoad(doc);
-                try {
+
+				//Remove MS markup that breals the SAML2 metadata format
+				var nodes = doc.GetElementsByTagName("Signature", SAML2.Saml20Constants.Xmldsig);
+				if (nodes.Count > 0) nodes[0].ParentNode.RemoveChild(nodes[0]);
+				doc.GetElementsByTagName("RoleDescriptor").Cast<XmlNode>().ToList().ForEach(node =>
+				{
+					var attr = node.Attributes.GetNamedItem("xsi:type");
+					if (attr?.Value == "fed:ApplicationServiceType" || attr?.Value == "fed:SecurityTokenServiceType")
+						node.ParentNode.RemoveChild(node);
+				});
+
+
+
+				try {
                     if (XmlSignatureUtils.IsSigned(doc) && !XmlSignatureUtils.CheckSignature(doc)) {
                         // Bad, bad, bad... never use exceptions for control flow! Who wrote this?
                         // Throw an exception to get into quirksmode.
