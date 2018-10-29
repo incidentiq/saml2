@@ -88,7 +88,7 @@ namespace SAML2.Utils
         /// <param name="sourceIdUrl">The source id URL.</param>
         /// <returns>The source id hash.</returns>
         public static byte[] GenerateSourceIdHash(string sourceIdUrl)
-        {
+        {			
             var sha = SHA1Managed.Create();
             var sourceId = sha.ComputeHash(Encoding.ASCII.GetBytes(sourceIdUrl));
 

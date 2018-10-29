@@ -27,6 +27,8 @@ namespace SAML2.Bindings
         /// </summary>
         private AsymmetricAlgorithm _signingKey;
 
+		public SAML2.Config.Saml2Configuration.RsaSignatureAlgorithms RsaSignatureAlgorithm { get; set; }
+
         /// <summary>
         /// Gets or sets the request.
         /// </summary>
@@ -157,7 +159,12 @@ namespace SAML2.Bindings
 
             if (_signingKey is RSA)
             {
-                result.Append(UpperCaseUrlEncode(Uri.EscapeDataString(SignedXml.XmlDsigRSASHA1Url)));
+				if(RsaSignatureAlgorithm == Config.Saml2Configuration.RsaSignatureAlgorithms.SHA256)
+					result.Append(UpperCaseUrlEncode(Uri.EscapeDataString(SignedXml.XmlDsigRSASHA256Url)));
+				else if (RsaSignatureAlgorithm == Config.Saml2Configuration.RsaSignatureAlgorithms.SHA512)
+					result.Append(UpperCaseUrlEncode(Uri.EscapeDataString(SignedXml.XmlDsigRSASHA512Url)));
+				else
+					result.Append(UpperCaseUrlEncode(Uri.EscapeDataString(SignedXml.XmlDsigRSASHA1Url)));
             }
             else
             {
@@ -181,8 +188,14 @@ namespace SAML2.Bindings
             if (_signingKey is RSACryptoServiceProvider)
             {
                 var rsa = (RSACryptoServiceProvider)_signingKey;
-                return rsa.SignData(data, new SHA1CryptoServiceProvider());
-            } 
+				if (RsaSignatureAlgorithm == Config.Saml2Configuration.RsaSignatureAlgorithms.SHA256)
+					return rsa.SignData(data, CryptoConfig.MapNameToOID("SHA256"));
+
+				else if (RsaSignatureAlgorithm == Config.Saml2Configuration.RsaSignatureAlgorithms.SHA512)
+					return rsa.SignData(data, CryptoConfig.MapNameToOID("SHA512"));
+
+				return rsa.SignData(data, new SHA1CryptoServiceProvider());
+			} 
             else
             {
                 var dsa = (DSACryptoServiceProvider)_signingKey;

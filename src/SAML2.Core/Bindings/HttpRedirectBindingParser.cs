@@ -127,7 +127,8 @@ namespace SAML2.Bindings
             var hash = new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes(_signedquery));
             if (key is RSACryptoServiceProvider)
             {
-                var rsa = (RSACryptoServiceProvider)key;
+				//Todo: JVT Add support for validating against sha256
+				var rsa = (RSACryptoServiceProvider)key;
                 return rsa.VerifyHash(hash, "SHA1", DecodeSignature());
             }
             else

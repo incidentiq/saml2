@@ -53,6 +53,14 @@ namespace SAML2.Config
         /// <value>The service provider.</value>
         public ServiceProvider ServiceProvider { get; set; }
 
+		public RsaSignatureAlgorithms RsaSignatureAlgorithm { get; set; } = RsaSignatureAlgorithms.SHA1;
+		public enum RsaSignatureAlgorithms: int
+		{
+			SHA1 = 0,
+			SHA256 = 1,
+			SHA512 = 2
+		}
+
         public Saml2Configuration()
         {
             IdentityProviders = new IdentityProviders();
