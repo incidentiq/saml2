@@ -253,7 +253,7 @@ namespace SAML2.Utils
         /// <param name="id">The id of the topmost element in the XmlDocument</param>
         public static void SignDocument(XmlDocument doc, string id, Saml2Configuration config)
         {
-            SignDocument(doc, id, config.ServiceProvider.SigningCertificate);
+            SignDocument(doc, id, config.ServiceProvider.SigningCertificate, config.RsaSignatureAlgorithm);
         }
 
         /// <summary>
@@ -262,12 +262,12 @@ namespace SAML2.Utils
         /// <param name="doc">The XmlDocument to be signed</param>
         /// <param name="id">The id of the topmost element in the XmlDocument</param>
         /// <param name="cert">The certificate used to sign the document</param>
-        public static void SignDocument(XmlDocument doc, string id, X509Certificate2 cert)
+        public static void SignDocument(XmlDocument doc, string id, X509Certificate2 cert, Saml2Configuration.RsaSignatureAlgorithms RsaSignatureAlgorithm)
         {
             var signedXml = new SignedXml(doc);
             signedXml.SignedInfo.CanonicalizationMethod = SignedXml.XmlDsigExcC14NTransformUrl;
             signedXml.SigningKey = cert.PrivateKey;
-
+            
             // Retrieve the value of the "ID" attribute on the root assertion element.
             var reference = new Reference("#" + id);
 
@@ -279,6 +279,13 @@ namespace SAML2.Utils
             // Include the public key of the certificate in the assertion.
             signedXml.KeyInfo = new KeyInfo();
             signedXml.KeyInfo.AddClause(new KeyInfoX509Data(cert, X509IncludeOption.WholeChain));
+
+            if(RsaSignatureAlgorithm == Saml2Configuration.RsaSignatureAlgorithms.SHA512)
+                signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512";
+            else if (RsaSignatureAlgorithm == Saml2Configuration.RsaSignatureAlgorithms.SHA256)
+                signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
+            else 
+                signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha1";
 
             signedXml.ComputeSignature();
 

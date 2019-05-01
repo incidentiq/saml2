@@ -33,7 +33,7 @@ namespace SAML2.Logging
             }
             private ILoggerFactory LocateLoggerFactory()
             {
-                string loggerClass = Configuration.LoggingFactoryType;
+                string loggerClass = Configuration?.LoggingFactoryType;
                 return string.IsNullOrEmpty(loggerClass) ? new NoLoggingLoggerFactory() : GetLoggerFactory(loggerClass);
             }
             public IInternalLogger LoggerFor(string keyName)

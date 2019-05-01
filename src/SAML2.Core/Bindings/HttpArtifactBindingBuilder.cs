@@ -44,7 +44,7 @@ namespace SAML2.Bindings
         {
             var index = (short)config.ServiceProvider.Endpoints.DefaultSignOnEndpoint.Index;
             var doc = request.GetXml();
-            XmlSignatureUtils.SignDocument(doc, request.Request.Id, config.ServiceProvider.SigningCertificate);
+            XmlSignatureUtils.SignDocument(doc, request.Request.Id, config);
             ArtifactRedirect(destination, index, doc, relayState, cacheInsert);
         }
 
@@ -59,7 +59,7 @@ namespace SAML2.Bindings
         {
             var index = (short)config.ServiceProvider.Endpoints.DefaultLogoutEndpoint.Index;
             var doc = request.GetXml();
-            XmlSignatureUtils.SignDocument(doc, request.Request.Id, config.ServiceProvider.SigningCertificate);
+            XmlSignatureUtils.SignDocument(doc, request.Request.Id, config);
             ArtifactRedirect(destination, index, doc, relayState, cacheInsert);
         }
 
@@ -74,7 +74,7 @@ namespace SAML2.Bindings
         {
             var index = (short)config.ServiceProvider.Endpoints.DefaultLogoutEndpoint.Index;
             var doc = response.GetXml();
-            XmlSignatureUtils.SignDocument(doc, response.Response.ID, config.ServiceProvider.SigningCertificate);
+            XmlSignatureUtils.SignDocument(doc, response.Response.ID, config);
 
             ArtifactRedirect(destination, index, doc, relayState, cacheInsert);
         }
@@ -106,7 +106,7 @@ namespace SAML2.Bindings
                 doc.RemoveChild(doc.FirstChild);
             }
 
-            XmlSignatureUtils.SignDocument(doc, resolve.Id, config.ServiceProvider.SigningCertificate);
+            XmlSignatureUtils.SignDocument(doc, resolve.Id, config);
 
             var artifactResolveString = doc.OuterXml;
 
@@ -132,7 +132,7 @@ namespace SAML2.Bindings
                 responseDoc.RemoveChild(responseDoc.FirstChild);
             }
 
-            XmlSignatureUtils.SignDocument(responseDoc, response.Id, config.ServiceProvider.SigningCertificate);
+            XmlSignatureUtils.SignDocument(responseDoc, response.Id, config);
 
             Logger.DebugFormat(TraceMessages.ArtifactResolveResponseSent, artifactResolve.Artifact, responseDoc.OuterXml);
 
