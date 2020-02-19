@@ -7,7 +7,7 @@ var gulp = require('gulp'),
 	util = require('gulp-util'),
 	exec = require('child_process').exec,
 	fs = require("fs"),
-	msbuild = require("gulp-msbuild"),
+	msbuild = require("gulp-current-msbuild"),
 	replace = require('gulp-replace');
 
 
@@ -21,8 +21,7 @@ var gulpBuild = function(configuration)
 					targets: ['Rebuild'],
 					properties:
 						{
-							Configuration: configuration,
-							VisualStudioVersion: "15.0",
+							Configuration: configuration,							
 						},
 					toolsVersion: "auto",
 					stdout: false,

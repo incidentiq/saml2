@@ -17,6 +17,11 @@ namespace SAML2.Validation
         private readonly bool _quirksMode;
 
         /// <summary>
+        /// Use ignoreNameIdLengthRequirement.
+        /// </summary>
+        private readonly bool _ignoreNameIdLengthRequirement;
+
+        /// <summary>
         /// The allowed audience URIs.
         /// </summary>
         private readonly List<Uri> _allowedAudienceUris;
@@ -41,10 +46,11 @@ namespace SAML2.Validation
         /// </summary>
         /// <param name="allowedAudienceUris">The allowed audience uris.</param>
         /// <param name="quirksMode">if set to <c>true</c> [quirks mode].</param>
-        public Saml20AssertionValidator(List<Uri> allowedAudienceUris, bool quirksMode)
+        public Saml20AssertionValidator(List<Uri> allowedAudienceUris, bool quirksMode, bool ignoreNameIdLengthRequirement)
         {
             _allowedAudienceUris = allowedAudienceUris;
             _quirksMode = quirksMode;
+            _ignoreNameIdLengthRequirement = ignoreNameIdLengthRequirement;
         }
 
         #region ISaml20AssertionValidator interface
@@ -199,7 +205,7 @@ namespace SAML2.Validation
             }
 
             // Make sure that the ID elements is at least 128 bits in length (SAML2.0 std section 1.3.4)
-            if (!Saml20Utils.ValidateIdString(assertion.Id))
+            if (!Saml20Utils.ValidateIdString(assertion.Id, _ignoreNameIdLengthRequirement))
             {
                 throw new Saml20FormatException("Assertion element must have an ID attribute with at least 16 characters (the equivalent of 128 bits)");
             }
@@ -217,7 +223,7 @@ namespace SAML2.Validation
             }
 
             // The Issuer element must be valid
-            _nameIdValidator.ValidateNameId(assertion.Issuer);
+            _nameIdValidator.ValidateNameId(assertion.Issuer, _ignoreNameIdLengthRequirement);
         }
 
         /// <summary>
@@ -385,7 +391,7 @@ namespace SAML2.Validation
             else
             {
                 // If a subject is present, validate it
-                _subjectValidator.ValidateSubject(assertion.Subject);
+                _subjectValidator.ValidateSubject(assertion.Subject, _ignoreNameIdLengthRequirement);
             }
         }
     }

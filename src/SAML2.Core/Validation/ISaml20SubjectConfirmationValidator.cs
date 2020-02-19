@@ -11,6 +11,7 @@ namespace SAML2.Validation
         /// Validates the subject confirmation.
         /// </summary>
         /// <param name="subjectConfirmation">The subject confirmation.</param>
-        void ValidateSubjectConfirmation(SubjectConfirmation subjectConfirmation);
+        /// <param name="ignoreNameIdLengthRequirement">Ignore name ID minimum length.</param>
+        void ValidateSubjectConfirmation(SubjectConfirmation subjectConfirmation, bool ignoreNameIdLengthRequirement);
     }
 }

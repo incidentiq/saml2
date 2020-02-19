@@ -5,7 +5,7 @@
   "devDependencies": {
     "fs": "0.0.1-security",
     "gulp": "^3.9.1",
-    "gulp-msbuild": "^0.5.4",
+    "gulp-current-msbuild": "^0.1.4",
     "gulp-replace": "^0.6.1",
     "gulp-util": "3.0.7"
   },

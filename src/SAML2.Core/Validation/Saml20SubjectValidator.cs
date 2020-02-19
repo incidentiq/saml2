@@ -23,7 +23,8 @@ namespace SAML2.Validation
         /// Validates the subject.
         /// </summary>
         /// <param name="subject">The subject.</param>
-        public virtual void ValidateSubject(Subject subject)
+        /// <param name="ignoreNameIdLengthRequirement">Ignore name ID minimum length.</param>
+        public virtual void ValidateSubject(Subject subject, bool ignoreNameIdLengthRequirement)
         {
             if (subject == null)
             {
@@ -41,7 +42,7 @@ namespace SAML2.Validation
                 if (o is NameId)
                 {
                     validContentFound = true;
-                    _nameIdValidator.ValidateNameId((NameId)o);
+                    _nameIdValidator.ValidateNameId((NameId)o, ignoreNameIdLengthRequirement);
                 }
                 else if (o is EncryptedElement)
                 {
@@ -51,7 +52,7 @@ namespace SAML2.Validation
                 else if (o is SubjectConfirmation)
                 {
                     validContentFound = true;
-                    _subjectConfirmationValidator.ValidateSubjectConfirmation((SubjectConfirmation)o);
+                    _subjectConfirmationValidator.ValidateSubjectConfirmation((SubjectConfirmation)o, ignoreNameIdLengthRequirement);
                 }
             }
 

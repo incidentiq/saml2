@@ -40,6 +40,11 @@ namespace SAML2
         private readonly bool _quirksMode;
 
         /// <summary>
+        /// Ignore name ID minimum length switch.
+        /// </summary>
+        private readonly bool _ignoreNameIdLengthRequirement;
+
+        /// <summary>
         /// A strongly-typed version of the assertion. It is generated on-demand from the contents of the <code>_samlAssertion</code>
         /// field. 
         /// </summary>
@@ -70,9 +75,10 @@ namespace SAML2
         /// <param name="assertion">The assertion.</param>
         /// <param name="trustedSigners">If <code>null</code>, the signature of the given assertion is not verified.</param>
         /// <param name="quirksMode">if set to <c>true</c> quirks mode is enabled.</param>
-        public Saml20Assertion(XmlElement assertion, IEnumerable<AsymmetricAlgorithm> trustedSigners, bool quirksMode, Saml2Configuration config)
+        public Saml20Assertion(XmlElement assertion, IEnumerable<AsymmetricAlgorithm> trustedSigners, bool quirksMode, bool ignoreNameIdLengthRequirement, Saml2Configuration config)
         {
             _quirksMode = quirksMode;
+            _ignoreNameIdLengthRequirement = ignoreNameIdLengthRequirement;
             _profile = null;
             _config = config;
             LoadXml(assertion, trustedSigners, config);
@@ -329,7 +335,7 @@ namespace SAML2
                 {
                     if (string.IsNullOrEmpty(_profile))
                     {
-                        _assertionValidator = new Saml20AssertionValidator(null, _quirksMode);
+                        _assertionValidator = new Saml20AssertionValidator(null, _quirksMode, _ignoreNameIdLengthRequirement);
                     }
                     else
                     {
@@ -340,7 +346,7 @@ namespace SAML2
                 {
                     if (string.IsNullOrEmpty(_profile))
                     {
-                        _assertionValidator = new Saml20AssertionValidator(config.AllowedAudienceUris, _quirksMode);
+                        _assertionValidator = new Saml20AssertionValidator(config.AllowedAudienceUris, _quirksMode, _ignoreNameIdLengthRequirement);
                     }
                     else
                     {

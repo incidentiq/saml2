@@ -31,7 +31,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20SubjectValidator();
 
                 // Act
-                validator.ValidateSubject(saml20Assertion.Subject);
+                validator.ValidateSubject(saml20Assertion.Subject, false);
             }
 
             /// <summary>
@@ -48,7 +48,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20SubjectValidator();
 
                 // Act
-                validator.ValidateSubject(saml20Assertion.Subject);
+                validator.ValidateSubject(saml20Assertion.Subject, false);
             }
         }
     }

@@ -41,9 +41,9 @@ namespace SAML2.Utils
         /// </summary>
         /// <param name="id">The id.</param>
         /// <returns>True if the id is valid, else false.</returns>
-        public static bool ValidateIdString(string id)
+        public static bool ValidateIdString(string id, bool ignoreNameIdLengthRequirement)
         {
-            return id != null && id.Length >= 16;
+            return id != null && id.Length >= (ignoreNameIdLengthRequirement ? 0 : 16);
         }
 
         /// <summary>

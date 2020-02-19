@@ -20,7 +20,7 @@ namespace SAML2.Validation
         /// Validates the name ID.
         /// </summary>
         /// <param name="nameId">The name ID.</param>
-        public void ValidateNameId(NameId nameId)
+        public void ValidateNameId(NameId nameId, bool ignoreNameIdLengthRequirement)
         {
             if (nameId == null)
             {
@@ -147,7 +147,7 @@ namespace SAML2.Validation
                     throw new Saml20FormatException("NameID with Transient Format attribute MUST have a Value that contains no more than 256 characters");
                 }
 
-                if (!Saml20Utils.ValidateIdString(nameId.Value))
+                if (!Saml20Utils.ValidateIdString(nameId.Value, ignoreNameIdLengthRequirement))
                 {
                     throw new Saml20FormatException("NameID with Transient Format attribute MUST have a Value with at least 16 characters (the equivalent of 128 bits)");
                 }

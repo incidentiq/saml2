@@ -29,7 +29,8 @@ namespace SAML2.Validation
         /// Validates the subject confirmation.
         /// </summary>
         /// <param name="subjectConfirmation">The subject confirmation.</param>
-        public void ValidateSubjectConfirmation(SubjectConfirmation subjectConfirmation)
+        /// <param name="ignoreNameIdLengthRequirement">Ignore name ID minimum length.</param>
+        public void ValidateSubjectConfirmation(SubjectConfirmation subjectConfirmation, bool ignoreNameIdLengthRequirement)
         {
             if (subjectConfirmation == null)
             {
@@ -55,7 +56,7 @@ namespace SAML2.Validation
             {
                 if (subjectConfirmation.Item is NameId)
                 {
-                    _nameIdValidator.ValidateNameId((NameId)subjectConfirmation.Item);
+                    _nameIdValidator.ValidateNameId((NameId)subjectConfirmation.Item, ignoreNameIdLengthRequirement);
                 }
                 else if (subjectConfirmation.Item is EncryptedElement)
                 {

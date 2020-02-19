@@ -12,7 +12,8 @@ namespace SAML2.Validation
         /// Validates the name ID.
         /// </summary>
         /// <param name="nameId">The name ID.</param>
-        void ValidateNameId(NameId nameId);
+        /// <param name="ignoreNameIdLengthRequirement">Ignore name ID minimum length.</param>
+        void ValidateNameId(NameId nameId, bool ignoreNameIdLengthRequirement);
 
         /// <summary>
         /// Validates the encrypted ID.

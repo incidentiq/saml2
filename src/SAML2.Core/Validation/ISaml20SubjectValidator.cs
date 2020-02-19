@@ -11,6 +11,7 @@ namespace SAML2.Validation
         /// Validates the subject.
         /// </summary>
         /// <param name="subject">The subject.</param>
-        void ValidateSubject(Subject subject);
+        /// <param name="ignoreNameIdLengthRequirement">Ignore name ID minimum length.</param>
+        void ValidateSubject(Subject subject, bool ignoreNameIdLengthRequirement);
     }
 }

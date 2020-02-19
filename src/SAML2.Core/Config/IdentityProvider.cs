@@ -68,6 +68,12 @@ namespace SAML2.Config
         public bool QuirksMode { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to ignore NameId minimum length during validation.
+        /// </summary>
+        /// <value><c>true</c> if IgnoreNameIdLengthRequirement mode should be enabled; otherwise, <c>false</c>.</value>
+        public bool IgnoreNameIdLengthRequirement { get; set; }
+
+        /// <summary>
         /// Gets or sets a value for overriding option for the default UTF-8 encoding convention on SAML responses
         /// </summary>
         /// <value>The response encoding.</value>

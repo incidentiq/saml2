@@ -59,7 +59,7 @@ namespace SAML2.Tests.Validation
                     try
                     {
                         // Act
-                        validator.ValidateNameId(nameId);
+                        validator.ValidateNameId(nameId, false);
 
                         // Assert
                         Assert.Fail("Email address " + email + " is not supposed to be valid");
@@ -87,7 +87,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             /// <summary>
@@ -105,7 +105,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             #endregion
@@ -128,7 +128,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             /// <summary>
@@ -147,7 +147,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             #endregion
@@ -170,7 +170,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             /// <summary>
@@ -188,10 +188,10 @@ namespace SAML2.Tests.Validation
 
                 // Act
                 nameId.Value = "a";
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
 
                 nameId.Value = "b\a";
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             #endregion
@@ -214,7 +214,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             /// <summary>
@@ -233,7 +233,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             /// <summary>
@@ -252,7 +252,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             /// <summary>
@@ -271,7 +271,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             /// <summary>
@@ -289,7 +289,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             #endregion
@@ -312,7 +312,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             /// <summary>
@@ -331,7 +331,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             /// <summary>
@@ -350,7 +350,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             /// <summary>
@@ -370,7 +370,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             /// <summary>
@@ -390,7 +390,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             /// <summary>
@@ -410,7 +410,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             /// <summary>
@@ -428,7 +428,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             #endregion
@@ -451,7 +451,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             /// <summary>
@@ -470,7 +470,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             /// <summary>
@@ -489,7 +489,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             /// <summary>
@@ -504,7 +504,7 @@ namespace SAML2.Tests.Validation
                                      Value = new string('f', 256)
                                  };
                 var validator = new Saml20NameIdValidator();
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             #endregion
@@ -527,7 +527,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             /// <summary>
@@ -546,7 +546,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 // Act
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
             
             /// <summary>
@@ -559,10 +559,10 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20NameIdValidator();
 
                 nameId.Value = new string('f', 256);
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
 
                 nameId.Value = new string('f', 16);
-                validator.ValidateNameId(nameId);
+                validator.ValidateNameId(nameId, false);
             }
 
             #endregion

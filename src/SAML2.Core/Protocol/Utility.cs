@@ -268,7 +268,8 @@ namespace SAML2.Protocol
             }
 
             var quirksMode = endp.QuirksMode;
-            var assertion = new Saml20Assertion(elem, null, quirksMode, config);
+            var ignoreNameIdLengthRequirement = endp.IgnoreNameIdLengthRequirement;
+            var assertion = new Saml20Assertion(elem, null, quirksMode, ignoreNameIdLengthRequirement, config);
 
             // Check signatures
             if (!endp.OmitAssertionSignatureCheck) {

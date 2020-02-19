@@ -35,7 +35,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20SubjectConfirmationValidator();
 
                 // Act
-                validator.ValidateSubjectConfirmation(subjectConfirmation);
+                validator.ValidateSubjectConfirmation(subjectConfirmation, false);
             }
 
             /// <summary>
@@ -50,7 +50,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20SubjectConfirmationValidator();
 
                 // Act
-                validator.ValidateSubjectConfirmation(subjectConfirmation);
+                validator.ValidateSubjectConfirmation(subjectConfirmation, false);
             }
 
             /// <summary>
@@ -65,7 +65,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20SubjectConfirmationValidator();
 
                 // Act
-                validator.ValidateSubjectConfirmation(subjectConfirmation);
+                validator.ValidateSubjectConfirmation(subjectConfirmation, false);
             }
 
             /// <summary>
@@ -89,7 +89,7 @@ namespace SAML2.Tests.Validation
                 var validator = new Saml20SubjectConfirmationValidator();
 
                 // Act
-                validator.ValidateSubjectConfirmation(subjectConfirmation);
+                validator.ValidateSubjectConfirmation(subjectConfirmation, false);
             }
         }
     }
