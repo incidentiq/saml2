@@ -310,6 +310,7 @@ namespace SAML2.Validation
                     }
 
                     Uri match = null;
+                    var audiencesRequested = new List<string>();
                     foreach (var audience in audienceRestriction.Audience)
                     {
                         // In QuirksMode this validation is omitted
@@ -322,6 +323,7 @@ namespace SAML2.Validation
                             }
                         }
 
+                        audiencesRequested.Add( audience );
                         match = _allowedAudienceUris.Find(allowedUri => allowedUri.Equals(new Uri(audience)));
                         if (match != null)
                         {
@@ -338,9 +340,7 @@ namespace SAML2.Validation
                     }
 
                     if (match == null)
-                    {
-                        throw new Saml20FormatException("The service is not configured to meet the given audience restrictions");
-                    }
+                        throw new Saml20FormatException( $"The service is not configured to meet the given audience restrictions [ Audiences requested = ${ string.Join( ", ", audiencesRequested ) } ]" );
                 }
             }
         }
