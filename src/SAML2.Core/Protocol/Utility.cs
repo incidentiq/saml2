@@ -395,7 +395,7 @@ namespace SAML2.Protocol
             // Check if an encoding-override exists for the IdP endpoint in question
             var issuer = Utility.GetIssuer(assertion);
             var endpoint = IdpSelectionUtil.RetrieveIDPConfiguration(issuer, config);
-            if (!endpoint.AllowReplayAttacks) {
+            if (endpoint != null && !endpoint.AllowReplayAttacks) {
                 Utility.CheckReplayAttack(doc.DocumentElement, !endpoint.AllowIdPInitiatedSso, session);
             }
             var status = Utility.GetStatusElement(doc.DocumentElement);
@@ -409,7 +409,7 @@ namespace SAML2.Protocol
                 throw new Saml20Exception(string.Format(ErrorMessages.ResponseStatusNotSuccessful, status));
             }
 
-            if (!string.IsNullOrEmpty(endpoint.ResponseEncoding)) {
+            if (endpoint != null && !string.IsNullOrEmpty(endpoint.ResponseEncoding)) {
                 Encoding encodingOverride;
                 try {
                     encodingOverride = Encoding.GetEncoding(endpoint.ResponseEncoding);
